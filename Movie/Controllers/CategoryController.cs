@@ -17,5 +17,21 @@ namespace Movie.Controllers
             IEnumerable<Category> categories = _db.Categories;
             return View(categories);
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Category obj) {
+            if(ModelState.IsValid)
+            {
+                _db.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(obj);
+        }
     }
 }
