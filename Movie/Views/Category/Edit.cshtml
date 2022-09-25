@@ -1,0 +1,20 @@
+﻿
+@model Category
+
+<form method="post" asp-controller="Category" asp-action="EditPost">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2>Edit Category @Model.Id</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <input hidden asp-for="Id" />
+            <label asp-for="Name"></label>
+            <input asp-for="Name" />
+        </div>
+        <div class="pb-2">
+            <input type="submit"/>
+        </div>
+    </div>
+</form>
+

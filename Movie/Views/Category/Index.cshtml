@@ -10,7 +10,7 @@
         <thead>
             <tr>
                 <td style="width: 50%">ID</td>
-                <td style="width: 50%">Name</td>
+                <td style="width: 30%">Name</td>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +19,7 @@
                 <tr>
                     <td>@category.Id</td>
                     <td>@category.Name</td>
+                    <td><a class="btn btn-secondary" asp-controller="Category" asp-action="Edit" asp-route-id="@category.Id">Edit Category</a></td>
                 </tr>
             }
         </tbody>

@@ -33,5 +33,27 @@ namespace Movie.Controllers
             }
             return View(obj);
         }
+
+        public IActionResult Edit(Guid id)
+        {
+            if (id != Guid.Empty)
+            {
+                Category obj = _db.Find<Category>(id);
+                return View(obj);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult EditPost(Category obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Update(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
