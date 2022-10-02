@@ -9,6 +9,7 @@ namespace Movie.Data
         public AppDbContext(DbContextOptions options) : base(options) {}
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Film> Films { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
