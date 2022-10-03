@@ -1,4 +1,4 @@
-﻿@model Film
+﻿@model CreateMovieViewModel
 @{
     IEnumerable<Category> categories = ViewData["Categories"] as IEnumerable<Category>;
 }
@@ -13,20 +13,37 @@
             <label asp-for="Name"></label>
             <input asp-for="Name" />
         </div>
-        <div class="dropdown mb-3">
+        <select id="dropdown" class="mb-3" onclick="getOption()">
+            <option disabled selected value=""> -- select a category -- </option>
+                @foreach(var category in categories)
+                {
+                    <option class="dropdown-item" value=@category.Id>@category.Name</option>
+                }
+        </select>
+        <input hidden asp-for="CategoryId" id="cat"/>
+
+
+        <!--<div class="dropdown mb-3">
           <a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <label asp-for="CategoryId"></label>
           </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                @foreach(var category in categories)
-                {
-                    <a class="dropdown-item" onclick=@{TempData["SelectedCat"] = category.Id;}>@category.Id</a>
-                }
+                  
+          <div id="dropdown" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                
+                <input asp-for="CategoryId" hidden />
           </div>
-        </div>
+        </div>-->
         <div class="pb-2">
             <input type="submit" asp-controller="Movie" asp-action="Create" />
         </div>
     </div>
 </form>
 
+<script type="text/javascript">
+    function getOption() {
+        selectElement = document.querySelector('#dropdown');
+        output = selectElement.value;
+        document.getElementById("cat").value = output;
+        console.log(document.getElementById("cat").value)
+    }
+</script>

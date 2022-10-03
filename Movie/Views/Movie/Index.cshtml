@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<Film>
 @{
     ViewData["Title"] = "Home Page";
+    IEnumerable<Category> cats = ViewData["Categories"] as IEnumerable<Category>;
 }
 
 <div class="text-center">
@@ -9,8 +10,9 @@
     <table class="table table-striped table-bordered mt-3"style="width: 100%">
         <thead>
             <tr>
-                <td style="width: 50%">ID</td>
+                <td style="width: 30%">ID</td>
                 <td style="width: 30%">Name</td>
+                <td style="width: 40%">Category</td>
             </tr>
         </thead>
         <tbody>
@@ -19,7 +21,7 @@
                 <tr>
                     <td>@movie.Id</td>
                     <td>@movie.Name</td>
-                    <td><a class="btn btn-secondary" asp-controller="Movie" asp-action="Edit" asp-route-id="@movie.Id">Edit Category</a></td>
+                    <td>@ViewData[movie.Name]</td>
                 </tr>
             }
         </tbody>

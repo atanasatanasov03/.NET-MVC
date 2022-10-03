@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Movie.Data;
 using Movie.Models;
+using Movie.ViewModels;
 
 namespace Movie.Controllers
 {
@@ -16,22 +17,32 @@ namespace Movie.Controllers
         public IActionResult Index()
         {
             IEnumerable<Film> movies = _db.Films;
+            foreach(var movie in movies)
+            {
+                var catId = movie.CategoryId;
+                ViewData[movie.Name] = _db.Categories.FirstOrDefault(cat => cat.Id == catId).Name;
+            }
+            
             return View(movies);
         }
 
         public IActionResult Create()
         {
             ViewData["Categories"] = _db.Categories;
-            return View();
+            return View(new CreateMovieViewModel());
         }
 
         [HttpPost]
-        public IActionResult Create(Film obj)
+        public IActionResult Create(CreateMovieViewModel obj)
         {
             if (ModelState.IsValid)
             {
-                obj.CategoryId = Guid.Parse((string)TempData["SelectedCat"]);
-                _db.Add(obj);
+                Film film = new Film
+                {
+                    CategoryId = obj.CategoryId,
+                    Name = obj.Name
+                };
+                _db.Add(film);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
