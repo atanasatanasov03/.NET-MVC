@@ -59,7 +59,16 @@ namespace Movie.Controllers
             if (id != Guid.Empty)
             {
                 Film obj = _db.Find<Film>(id);
-                return View(obj);
+                
+                EditMovieViewModel vm = new EditMovieViewModel()
+                {
+                    Id = obj.Id,
+                    Name = obj.Name,
+                    CategoryId = obj.CategoryId
+                };
+                ViewData["Categories"] = _db.Categories;
+
+                return View(vm);
             }
             return RedirectToAction("Index");
         }
@@ -70,6 +79,29 @@ namespace Movie.Controllers
             if (ModelState.IsValid)
             {
                 _db.Update(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(Guid id)
+        {
+            if (id != Guid.Empty)
+            {
+                Film obj = _db.Find<Film>(id);
+
+                return View(obj);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult DeletePost(Film obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Remove(obj);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }

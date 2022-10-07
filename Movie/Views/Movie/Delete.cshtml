@@ -1,0 +1,20 @@
+﻿
+@model Film
+
+<form method="post" asp-controller="Movie" asp-action="DeletePost">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2>Are you sure you want to delete @Model.Name?</h2>
+            <hr />
+        </div>
+        <div>
+            <input hidden asp-for="Id" />
+            <input hidden asp-for="Name" />
+            <input hidden asp-for="CategoryId" />
+        </div>
+        <div class="pb-2">
+            <input type="submit"/>
+        </div>
+    </div>
+</form>
+

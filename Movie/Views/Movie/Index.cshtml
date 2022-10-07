@@ -22,6 +22,10 @@
                     <td>@movie.Id</td>
                     <td>@movie.Name</td>
                     <td>@ViewData[movie.Name]</td>
+                    <td class="btn-group" role="group">
+                        <a class="btn btn-secondary" asp-controller="Movie" asp-action="Edit" asp-route-id="@movie.Id">Edit Movie</a>
+                        <a class="btn btn-danger" asp-controller="Movie" asp-action="Delete" asp-route-id="@movie.Id">Delete Movie</a>
+                    </td>
                 </tr>
             }
         </tbody>
