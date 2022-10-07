@@ -45,7 +45,8 @@ namespace Movie.Controllers
                 Film film = new Film
                 {
                     CategoryId = obj.CategoryId,
-                    Name = obj.Name
+                    Name = obj.Name,
+                    CreatedDate = DateTime.Now
                 };
                 _db.Add(film);
                 _db.SaveChanges();

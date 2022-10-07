@@ -1,8 +1,24 @@
-﻿@{
+﻿@model IEnumerable<Film>
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to my Movie Blog!</h1>
+    <br />
+
+    <h2>Recently added movies</h2>
+    <div style="display: flex; flex-direction: row;">
+        @foreach(var movie in Model)
+        {
+        
+                <div style="display: flex; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s; box-sizing: content-box; margin: 10px;">
+                    <div style="padding: 2px 16px">
+                        <h4>@movie.Name</h4>
+                    </div>
+                </div>
+        
+        }
+    </div>
+    
 </div>
