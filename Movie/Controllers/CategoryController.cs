@@ -55,5 +55,32 @@ namespace Movie.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public IActionResult Delete(Guid id)
+        {
+            if (id != Guid.Empty)
+            {
+                Category obj = _db.Find<Category>(id);
+                return View(obj);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult DeletePost(Category obj)
+        {
+            if (ModelState.IsValid)
+            {
+                IEnumerable<Film> films = _db.Films.Where(f => f.CategoryId == obj.Id);
+                foreach(var film in films)
+                {
+                    film.CategoryId = Guid.Empty;
+                }
+                _db.Remove(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

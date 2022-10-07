@@ -20,7 +20,12 @@ namespace Movie.Controllers
             foreach(var movie in movies)
             {
                 var catId = movie.CategoryId;
-                ViewData[movie.Name] = _db.Categories.FirstOrDefault(cat => cat.Id == catId).Name;
+                if(catId != Guid.Empty) { 
+                    ViewData[movie.Name] = _db.Categories.FirstOrDefault(cat => cat.Id == catId).Name;
+                } else
+                {
+                    ViewData[movie.Name] = "Category Deleted";
+                }
             }
             
             return View(movies);

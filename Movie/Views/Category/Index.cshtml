@@ -19,7 +19,10 @@
                 <tr>
                     <td>@category.Id</td>
                     <td>@category.Name</td>
-                    <td><a class="btn btn-secondary" asp-controller="Category" asp-action="Edit" asp-route-id="@category.Id">Edit Category</a></td>
+                    <td class="btn-group" role="group">
+                        <a class="btn btn-secondary" asp-controller="Category" asp-action="Edit" asp-route-id="@category.Id">Edit Category</a>
+                        <a class="btn btn-danger" asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id">Delete Category</a>
+                    </td>
                 </tr>
             }
         </tbody>

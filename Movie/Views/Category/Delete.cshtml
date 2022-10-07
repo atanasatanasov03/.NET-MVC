@@ -1,16 +1,15 @@
 ﻿
 @model Category
 
-<form method="post" asp-controller="Category" asp-action="EditPost">
+<form method="post" asp-controller="Category" asp-action="DeletePost">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2>Edit Category @Model.Name</h2>
+            <h2>Are you sure you want to delete @Model.Name?</h2>
             <hr />
         </div>
-        <div class="mb-3">
+        <div>
             <input hidden asp-for="Id" />
-            <label asp-for="Name"></label>
-            <input asp-for="Name" />
+            <input hidden asp-for="Name" />
         </div>
         <div class="pb-2">
             <input type="submit"/>
