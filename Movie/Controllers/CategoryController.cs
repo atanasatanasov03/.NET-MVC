@@ -82,5 +82,15 @@ namespace Movie.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public IActionResult Single(Guid id)
+        {
+            if (id != Guid.Empty)
+            {
+                Category obj = _db.Find<Category>(id);
+                return View(obj);
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
