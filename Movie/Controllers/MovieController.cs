@@ -46,6 +46,7 @@ namespace Movie.Controllers
                 {
                     CategoryId = obj.CategoryId,
                     Name = obj.Name,
+                    Description = obj.Description,
                     CreatedDate = DateTime.Now
                 };
                 _db.Add(film);
@@ -105,6 +106,24 @@ namespace Movie.Controllers
                 _db.Remove(obj);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Single(Guid id)
+        {
+            if (id != Guid.Empty)
+            {
+                Film obj = _db.Find<Film>(id);
+                Category cat = _db.Find<Category>(obj.CategoryId);
+
+                SingleMovieViewModel vm = new SingleMovieViewModel()
+                {
+                    movie = obj,
+                    category = cat
+                };
+
+                return View(vm);
             }
             return RedirectToAction("Index");
         }

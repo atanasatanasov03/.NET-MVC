@@ -2,16 +2,16 @@
 @model Category
 
 <div class="card mt-5">
-  <div class="card-header">
-    Category
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">@Model.Name</h5>
-    <p class="card-text">@Model.Description</p>
-    <a class="btn btn-secondary" asp-controller="Category" asp-action="Edit" asp-route-id="@Model.Id">
-        <i class="bi bi-pen"></i> Edit
-    </a>
-  </div>
+    <div class="card-header">
+        Category
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">@Model.Description</p>
+        <a class="btn btn-secondary" asp-controller="Category" asp-action="Edit" asp-route-id="@Model.Id">
+            <i class="bi bi-pen"></i> Edit
+        </a>
+    </div>
 </div>
 
 <p>Tuka she budat filmite ot suotvetnata kategoriq nqkoga v budeshteto</p>

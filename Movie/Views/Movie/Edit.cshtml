@@ -10,21 +10,37 @@
             <h2>Edit Movie @Model.Name</h2>
             <hr />
         </div>
-        <div class="mb-3">
+
+        <div class="form-group">
             <input hidden asp-for="Id" />
             <label asp-for="Name"></label>
-            <input asp-for="Name" />
-            <select id="dropdown" class="mb-3" onclick="getOption()">
-                <option disabled selected value=""> -- select a new category -- </option>
-                    @foreach(var category in categories)
+            <input asp-for="Name" class="form-control" id="MovName" aria-describedby="MovName" placeholder="Enter Movie Name">
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control" id="MovDesc" aria-describedby="MovDesc" placeholder="Enter Movie Description">
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="exampleFormControlSelect1">Select Category</label>
+            <select class="form-control" id="dropdown" class="mb-3" onclick="getOption()">
+                @foreach(var category in categories)
+                {
+                    if(category.Id == Model.CategoryId)
+                    {
+                        <option class="dropdown-item" value=@category.Id selected>@category.Name</option>
+                    } else
                     {
                         <option class="dropdown-item" value=@category.Id>@category.Name</option>
                     }
+                }
             </select>
             <input hidden asp-for="CategoryId" id="cat"/>
         </div>
-        <div class="pb-2">
-            <input type="submit"/>
+
+        <div class="pb-2 mt-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </div>
 </form>
@@ -37,3 +53,20 @@
         console.log(document.getElementById("cat").value)
     }
 </script>
+
+<!--<div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" />
+            <select id="dropdown" class="mb-3" onclick="getOption()">
+                <option disabled selected value=""> -- select a new category -- </option>
+                    @foreach(var category in categories)
+                    {
+                        <option class="dropdown-item" value=@category.Id>@category.Name</option>
+                    }
+            </select>
+            <input hidden asp-for="CategoryId" id="cat"/>
+        </div>
+
+        <div class="pb-2">
+            <input type="submit"/>
+        </div>-->

@@ -7,16 +7,19 @@
             <h2>Create Category</h2>
             <hr />
         </div>
-        <div class="mb-3">
+
+        <div class="form-group">
             <label asp-for="Name"></label>
-            <input asp-for="Name" />
+            <input asp-for="Name" class="form-control" id="CatName" aria-describedby="CatName" placeholder="Enter Category Name">
         </div>
-        <div class="mb-3">
+
+        <div class="form-group mt-3">
             <label asp-for="Description"></label>
-            <input asp-for="Description" />
+            <input asp-for="Description" class="form-control" id="CatDesc" aria-describedby="CatDesc" placeholder="Enter Category Description">
         </div>
-        <div class="pb-2">
-            <input type="submit" asp-controller="Category" asp-action="Create" />
+
+        <div class="pb-2 mt-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </div>
 </form>

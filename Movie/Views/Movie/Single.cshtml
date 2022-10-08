@@ -1,0 +1,30 @@
+﻿@model SingleMovieViewModel
+
+<div class="card mt-5">
+    <div class="card-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    Movie
+                </div>
+                <div class="col-6 text-end align-self-end ml-auto">
+                    Added: @Model.movie.CreatedDate
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="card-body">
+        <h4 class="card-title">@Model.movie.Name</h4>
+
+        <h5 class="card-title text-muted">@Model.category.Name</h5>
+
+        <p class="card-text">@Model.movie.Description</p>
+
+        <a class="btn btn-secondary" asp-controller="Movie" asp-action="Edit" asp-route-id="@Model.movie.Id">
+            <i class="bi bi-pen"></i> Edit
+        </a>
+    </div>
+</div>
+    

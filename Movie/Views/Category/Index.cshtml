@@ -28,12 +28,14 @@
                                 <h4>@category.Name</h4>
                             </div>
                             <div class="col-6 d-inline-flex flex-row-reverse">
-                                <a class="btn btn-danger" asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id">
-                                    <i class="bi bi-x"></i>
-                                </a>
-                                <a class="btn btn-info" asp-controller="Category" asp-action="Single" asp-route-id="@category.Id">
-                                    <i class="bi bi-info-circle"></i>
-                                </a>
+                                <div class="btn-group">
+                                    <a class="btn btn-info" asp-controller="Category" asp-action="Single" asp-route-id="@category.Id">
+                                        <i class="bi bi-info-circle"></i>
+                                    </a>
+                                    <a class="btn btn-danger" asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id">
+                                        <i class="bi bi-x"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
