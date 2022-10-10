@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /Movie/Views/Movie/Edit.cshtml
 /Movie/Views/Movie/Create.cshtml
+/Movie/wwwroot/images/168afc6f-9d9d-4a80-86d1-eb45efb7c126-dbScheme.png
+/Movie/wwwroot/images

@@ -8,10 +8,12 @@ namespace Movie.Controllers
     public class MovieController : Controller
     {
         private readonly AppDbContext _db;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public MovieController(AppDbContext db)
+        public MovieController(AppDbContext db, IWebHostEnvironment webHost)
         {
             _db = db;
+            _webHostEnvironment = webHost;
         }
 
         public IActionResult Index()
@@ -42,11 +44,13 @@ namespace Movie.Controllers
         {
             if (ModelState.IsValid)
             {
+                string fileName = UploadPicture(obj);
                 Film film = new Film
                 {
                     CategoryId = obj.CategoryId,
                     Name = obj.Name,
                     Description = obj.Description,
+                    FilmImage = fileName,
                     CreatedDate = DateTime.Now
                 };
                 _db.Add(film);
@@ -54,6 +58,25 @@ namespace Movie.Controllers
                 return RedirectToAction("Index");
             }
             return View(obj);
+        }
+
+        private string UploadPicture(CreateMovieViewModel obj)
+        {
+            string fileName = null;
+            if(obj.FilmImage != null)
+            {
+                string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                fileName = Guid.NewGuid().ToString() + "-" + obj.FilmImage.FileName;
+                string filePath = Path.Combine(uploadDir, fileName);
+                using(var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    obj.FilmImage.CopyTo(fileStream);
+                }
+            } else
+            {
+                fileName = "no-image.svg";  //NQMA KAK DA STANE VINAGI SHE IMA SNIMKA ;P
+            }
+            return fileName;
         }
 
         public IActionResult Edit(Guid id)
