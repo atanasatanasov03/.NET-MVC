@@ -13,11 +13,11 @@
         {
             <div class="card" style="width: 18rem; margin-right: 1em">
               <img class="card-img-top" src="~/images/@movie.FilmImage" alt="Card image cap" style="width:286; height: 180;">
-                <div class="card-body">
-                    <h5 class="card-title">@movie.Name</h5>
-                    <p class="card-text">@movie.Description</p>
-                    <a class="btn btn-info" asp-controller="Movie" asp-action="Single" asp-route-id="@movie.Id">See movie page</a>
-                </div>
+              <div class="card-body">
+                  <h5 class="card-title">@movie.Name</h5>
+                  <p class="card-text">@movie.Description</p>
+                  <a class="btn btn-info" asp-controller="Movie" asp-action="Single" asp-route-id="@movie.Id">See movie page</a>
+              </div>
             </div>
         }
     </div>

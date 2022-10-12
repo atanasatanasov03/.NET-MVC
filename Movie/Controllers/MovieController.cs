@@ -63,6 +63,7 @@ namespace Movie.Controllers
         private string UploadPicture(CreateMovieViewModel obj)
         {
             string fileName = null;
+
             if(obj.FilmImage != null)
             {
                 string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "images");
@@ -72,10 +73,8 @@ namespace Movie.Controllers
                 {
                     obj.FilmImage.CopyTo(fileStream);
                 }
-            } else
-            {
-                fileName = "no-image.svg";  //NQMA KAK DA STANE VINAGI SHE IMA SNIMKA ;P
             }
+
             return fileName;
         }
 

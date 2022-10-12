@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Movie.Data;
 using Movie.Models;
+using Movie.ViewModels;
 
 namespace Movie.Controllers
 {
@@ -8,9 +9,12 @@ namespace Movie.Controllers
     {
         private readonly AppDbContext _db;
 
-        public CategoryController(AppDbContext db)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public CategoryController(AppDbContext db, IWebHostEnvironment webHostEnvironment)
         {
             _db = db;
+            _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -24,14 +28,39 @@ namespace Movie.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Category obj) {
+        public IActionResult Create(CreateCategoryViewModel obj) {
             if(ModelState.IsValid)
             {
-                _db.Add(obj);
+                string fileName = UploadPicture(obj);
+                Category cat = new Category
+                {
+                    Name = obj.Name,
+                    Description = obj.Description,
+                    CatImage = fileName
+                };
+                _db.Add(cat);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(obj);
+        }
+
+        private string UploadPicture(CreateCategoryViewModel obj)
+        {
+            string fileName = null;
+
+            if (obj.CatImage != null)
+            {
+                string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "images");
+                fileName = Guid.NewGuid().ToString() + "-" + obj.CatImage.FileName;
+                string filePath = Path.Combine(uploadDir, fileName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    obj.CatImage.CopyTo(fileStream);
+                }
+            }
+
+            return fileName;
         }
 
         public IActionResult Edit(Guid id)
