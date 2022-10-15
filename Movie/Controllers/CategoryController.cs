@@ -36,7 +36,8 @@ namespace Movie.Controllers
                 {
                     Name = obj.Name,
                     Description = obj.Description,
-                    CatImage = fileName
+                    CatImage = fileName,
+                    CreatedDate = DateTime.Now
                 };
                 _db.Add(cat);
                 _db.SaveChanges();
@@ -117,7 +118,15 @@ namespace Movie.Controllers
             if (id != Guid.Empty)
             {
                 Category obj = _db.Find<Category>(id);
-                return View(obj);
+                IEnumerable<Film> movies = _db.Films.Where(f => f.CategoryId == obj.Id);
+
+                SingleCategoryViewModel vm = new SingleCategoryViewModel
+                {
+                    category = obj,
+                    movies = movies,
+                    tripletsNum = Math.Ceiling((double)movies.Count() / 3)
+                };
+                return View(vm);
             }
             return RedirectToAction("Index");
         }

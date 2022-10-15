@@ -11,31 +11,21 @@
                     Added: @Model.movie.CreatedDate
                 </div>
             </div>
-        </div>
-        
+        </div>    
     </div>
 
+    <img src="~/images/@Model.movie.FilmImage" class="card-img-top image_size" alt="Movie image"/>
+    
     <div class="card-body">
+        <h4 class="card-title">@Model.movie.Name</h4>
 
-        <div class="container p-2">
-            <div class="row pt-4 pb-4">
-                <div class="col-6 text-center">
-                    <img src="~/images/@Model.movie.FilmImage" class="rounded-circle img-fluid" style="width: 20em; height: 20em"/>
-                </div>
-                <div class="col-6 text-end align-self-center ml-auto">
-                    <h4 class="card-title">@Model.movie.Name</h4>
+        <h5 class="card-title text-muted">@Model.category.Name</h5>
 
-                    <h5 class="card-title text-muted">@Model.category.Name</h5>
+        <p class="card-text">@Model.movie.Description</p>
 
-                    <p class="card-text">@Model.movie.Description</p>
-
-                    <a class="btn btn-secondary" asp-controller="Movie" asp-action="Edit" asp-route-id="@Model.movie.Id">
-                        <i class="bi bi-pen"></i> Edit
-                    </a>
-                </div>
-            </div>
-        </div>
-
+        <a class="btn btn-secondary" asp-controller="Movie" asp-action="Edit" asp-route-id="@Model.movie.Id">
+            <i class="bi bi-pen"></i> Edit
+        </a>
     </div>
 </div>
     

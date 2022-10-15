@@ -1,18 +1,98 @@
-﻿
-@model Category
+﻿@model SingleCategoryViewModel
 
 <div class="card mt-5">
     <div class="card-header">
-        Category
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    Category
+                </div>
+                <div class="col-6 text-end align-self-end ml-auto">
+                    Added: @Model.category.CreatedDate
+                </div>
+            </div>
+        </div>    
     </div>
-    <img class="card-img-top" src="~/images/@Model.CatImage" alt="Card image cap">
+
+    <img class="card-img-top image_size" src="~/images/@Model.category.CatImage" alt="Category image">
+    
     <div class="card-body">
-        <h5 class="card-title">@Model.Name</h5>
-        <p class="card-text">@Model.Description</p>
-        <a class="btn btn-secondary" asp-controller="Category" asp-action="Edit" asp-route-id="@Model.Id">
+        <h4 class="card-title">@Model.category.Name</h4>
+
+        <p class="card-text">@Model.category.Description</p>
+
+        <a class="btn btn-secondary" asp-controller="Category" asp-action="Edit" asp-route-id="@Model.category.Id">
             <i class="bi bi-pen"></i> Edit
         </a>
     </div>
 </div>
 
-<p>Tuka she budat filmite ot suotvetnata kategoriq nqkoga v budeshteto</p>
+<div class="container mt-3">
+    <div class="row">
+            <div class="col-6">
+                <h3 class="mb-3">Movies</h3>
+            </div>
+
+            <div class="col-12">
+                <div id="movieCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+
+                        @for(int j = 0; j < Model.tripletsNum; j++) {
+                            if(j == 0) {
+                                <div class="row">
+                                    @for(int k = 0; k < 3; k++) {
+                                        <div class="col-md-4">
+                                            <div class="card mb-2">  
+                                                <img class="card-img-top image_size_sm" src="~/images/@Model.movies.ElementAt(k).FilmImage" alt="Category image">
+                                                
+                                                <div class="card-body">
+                                                    <h4 class="card-title">@Model.movies.ElementAt(k).Name</h4>
+                                                    
+                                                    <p class="card-text">@Model.movies.ElementAt(k).Description</p>
+                                                    
+                                                    <a class="btn btn-primary" asp-controller="Movie" asp-action="Single" asp-route-id="@Model.movies.ElementAt(k).Id">See movie page</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                            
+                                        }
+                                 </div>
+                             } else {
+                                <div class="row">
+                                    @for(int k = j*3; k < (j*3)+3; k++) {
+                                        if(k < Model.movies.Count()) {
+                                            <div class="col-md-4">
+                                                <div class="card mb-2">
+                                                    <img class="card-img-top image_size_sm" src="~/images/@Model.movies.ElementAt(k).FilmImage" alt="Category image">
+                                                    
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">@Model.movies.ElementAt(k).Name</h4>
+                                                        
+                                                        <p class="card-text">@Model.movies.ElementAt(k).Description</p>
+                                                        
+                                                        <a class="btn btn-primary" asp-controller="Movie" asp-action="Single" asp-route-id="@Model.movies.ElementAt(k).Id">See movie page</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            }
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script type="text/javascript">
+    function up() {
+        document.getElementById('j').value += 1
+        console.log(j)
+    }
+    function down() {
+        j -= 1
+        console.log(j)
+    }
+</script>
